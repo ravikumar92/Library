@@ -12,7 +12,7 @@ export class RegisterPage extends React.Component {
             user: {
                 firstName: '',
                 lastName: '',
-                username: '',
+                userName: '',
                 password: ''
             },
             submitted: false
@@ -38,8 +38,26 @@ export class RegisterPage extends React.Component {
 
         this.setState({ submitted: true });
         const { user } = this.state;
-        data.push(this.state.user);
-        history.push('/');
+        fetch('http://localhost:8080/register-user',{
+            method:'POST',
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify(this.state.user)
+        })
+        .then((res) => res.json())
+        .then((resp) => {
+            if (resp.status == true) {
+                alert("User created Successfully!")
+                history.push('/')
+            } else if(resp.message) {
+                alert(resp.message);
+            }
+             else {
+                alert("Error creating User!");
+            }
+        });
+       
     }
 
     render() {
@@ -63,11 +81,11 @@ export class RegisterPage extends React.Component {
                             <div className="help-block">Last Name is required</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
-                        <label htmlFor="username">Username</label>
-                        <input type="text" className="form-control" name="username" value={user.username} onChange={this.handleChange} />
-                        {submitted && !user.username &&
-                            <div className="help-block">Username is required</div>
+                    <div className={'form-group' + (submitted && !user.userName ? ' has-error' : '')}>
+                        <label htmlFor="userName">User Name</label>
+                        <input type="text" className="form-control" name="userName" value={user.userName} onChange={this.handleChange} />
+                        {submitted && !user.userName &&
+                            <div className="help-block">userName is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>

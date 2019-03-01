@@ -30,7 +30,7 @@ export class NavBar extends React.Component {
          <Link to="/issue"><p className="dropdown-item" >Issue</p></Link> 
          <Link to="/return"><p className="dropdown-item" >Return</p></Link> 
           <div className="dropdown-divider"></div>
-          <a className="dropdown-item" >Setting</a>
+          <Link to="/setting"><p className="dropdown-item" >Setting</p></Link>
           <Link to="/"><p className="nav-link " aria-disabled="true">Logout</p></Link> 
         </div>
       </li>

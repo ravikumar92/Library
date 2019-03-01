@@ -9,6 +9,7 @@ import { RegisterPage } from './RegisterPage/index';
 import { Books } from './Books/books';
 import { Issue } from './IssueBook/issueBook';
 import { Return } from './returnBook/returnBook';
+import { Setting } from './settings';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
            <Route path="/books" exact component={Books} />
            <Route path="/issue" exact component={Issue} />
            <Route path="/return" exact component={Return} />
+           <Route path="/setting"  exact component={Setting}/>
            </div>
            </Router>
       </div>

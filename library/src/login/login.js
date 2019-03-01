@@ -41,15 +41,14 @@ export class Login extends React.Component {
             "Content-Type": "application/json"
         },
         body:JSON.stringify(this.state)
-    }).then( res =>{
-        res.json()
-        .then(resp => {
-            if(resp.value == true){
-                history.push('/home');
-            } else {
-                alert("USer Name or password is incorrect")
-            }
-        })
+    })
+    .then((res) => res.json())
+    .then((resp) => {
+        if(resp.value == true) {
+            history.push('/home');
+        } else {
+            alert(resp.message);
+        }
     })
    }
     render() {

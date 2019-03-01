@@ -33,7 +33,7 @@ export class Return extends React.Component {
     <label htmlFor="inputReturnDate">Return Date</label>
     <input type="text" className="form-control" id="inputReturnDate" placeholder="dd/mm/yy" onChange={(event) => this.getData('returnDate',  event)}/>
   </div>
-  <button type="submit" className="btn btn-primary">Issue</button>
+  <button type="submit" className="btn btn-primary">Return</button>
 </form>
 </div>
         </div>

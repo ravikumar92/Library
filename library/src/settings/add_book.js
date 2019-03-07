@@ -23,7 +23,7 @@ export class AddBook extends React.Component {
 
     submitData(event) {
         event.preventDefault();
-        fetch('http://localhost:8080/save-book',{
+        fetch('http://10.11.7.59:8080/save-book',{
             method:'POST',
             headers:{
                 "Content-Type": "application/json"

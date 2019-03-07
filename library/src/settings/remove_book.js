@@ -19,7 +19,7 @@ export class RemoveBook extends React.Component {
 
     removeData(event) {
         event.preventDefault();
-        fetch('http://localhost:8080/remove-book', {
+        fetch('http://10.11.7.59:8080/remove-book', {
             method:'DELETE',
             headers:{
                 "Content-Type": "application/json"

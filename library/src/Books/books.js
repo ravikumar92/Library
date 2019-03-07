@@ -1,7 +1,6 @@
 import React from 'react';
 import './books.css';
 import { NavBar } from '../navbar/navbar';
-import { books_records } from '../data/books_data';
 
 let data;
 
@@ -15,7 +14,7 @@ export class Books extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/book-data')
+        fetch('http://10.11.7.59:8080/book-data')
         .then( res => {
             res.json()
             .then(resp => data = resp)
@@ -24,17 +23,18 @@ export class Books extends React.Component {
     
     bookData() {
         let count = 0;
+        console.log(data)
        this.setState({
         bookList: data.map(function(item){
             count++;
             return (
-                <tr key={item.isbn}>
+                <tr key={item._id}>
                     <th scope="row">{count}</th>
-                    <td>{item.title}</td>
+                    <td>{item.bookId}</td>
+                    <td>{item.bookName}</td>
                     <td>{item.author}</td>
-                    <td>{item.published}</td>
                     <td>{item.publisher}</td>
-                    <td>{item.number}</td>
+                    <td>{item.bookCount}</td>
                 </tr>
             )
         }) 
@@ -55,9 +55,9 @@ export class Books extends React.Component {
         <thead>
         <tr>
         <th scope="col">S.no</th>
+        <th scope="col">Id</th>
         <th scope="col">title</th>
         <th scope="col">author</th>
-        <th scope="col">published</th>
         <th scope="col">publisher</th>
         <th scope="col">In Stock</th>
         </tr>

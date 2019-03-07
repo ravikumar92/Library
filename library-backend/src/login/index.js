@@ -6,6 +6,7 @@ const router = express.Router();
 
 
 router.post('/login-user',(req, res) => {
+    console.log(req.body)
     registerSchema.find({"userName": req.body.userName}, function(err, data){
         if (err) throw err;
         if(data.length == 0) {

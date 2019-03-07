@@ -19,7 +19,7 @@ router.post('/register-user',(req,res) => {
     sendData.save(function(err, data) {
         if (err) return console.error(err);
         res.status(201);
-        res.send({"status":true})
+        res.send({"status":true, "message":"User Registered Sucessfully"})
     })
         }
     })

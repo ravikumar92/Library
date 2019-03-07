@@ -18,6 +18,13 @@ router.post('/save-book',(req, res) => {
    })
 });
 
+router.get('/book-data',(req, res) => {
+   bookModel.find({}, function(err, data){
+      if(err) return console.error(err);
+      res.send(data);
+   })
+})
+
 router.delete('/remove-book', (req, res) => {
    bookModel.deleteOne({
       bookName: req.body.bookName,

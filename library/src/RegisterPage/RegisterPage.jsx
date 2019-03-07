@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { registration } from '../redux/action/registrationAction';
+
 import { data } from '../data/data'
 import {history} from '../history/history'
 
 
-export class RegisterPage extends React.Component {
+class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -15,11 +18,21 @@ export class RegisterPage extends React.Component {
                 userName: '',
                 password: ''
             },
+            message:'',
             submitted: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            user: nextProps.user,
+            message: nextProps.message,
+            submitted: nextProps.submitted
+        });
+        alert(nextProps.message)
     }
 
     handleChange(event) {
@@ -35,29 +48,7 @@ export class RegisterPage extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-
-        this.setState({ submitted: true });
-        const { user } = this.state;
-        fetch('http://localhost:8080/register-user',{
-            method:'POST',
-        headers:{
-            "Content-Type": "application/json"
-        },
-        body:JSON.stringify(this.state.user)
-        })
-        .then((res) => res.json())
-        .then((resp) => {
-            if (resp.status == true) {
-                alert("User created Successfully!")
-                history.push('/')
-            } else if(resp.message) {
-                alert(resp.message);
-            }
-             else {
-                alert("Error creating User!");
-            }
-        });
-       
+        this.props.dispatch(registration(this.state.user))
     }
 
     render() {
@@ -107,3 +98,19 @@ export class RegisterPage extends React.Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    console.log(state)
+   return {
+       user: state.reg.user,
+       message: state.reg.message,
+       submitted: state.reg.submitted
+   }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        dispatch
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);

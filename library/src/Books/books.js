@@ -1,46 +1,57 @@
 import React from 'react';
 import './books.css';
+import { connect } from 'react-redux'
+import  { getData }  from '../redux/action/dataReducer';
 import { NavBar } from '../navbar/navbar';
 
 let data;
 
-export class Books extends React.Component {
+class Books extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookList:''
+            bookList: [],
+            isFetching: false,
+            errorMEssage: ''
         }
         this.bookData = this.bookData.bind(this);
     }
 
-    componentDidMount() {
-        fetch('http://10.11.7.59:8080/book-data')
-        .then( res => {
-            res.json()
-            .then(resp => data = resp)
-        } )
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            bookList: nextProps.bookList,
+            isFetching: nextProps.isFetching,
+            errorMEssage: nextProps.errorMEssage
+        })
     }
     
     bookData() {
-        let count = 0;
-        console.log(data)
-       this.setState({
-        bookList: data.map(function(item){
-            count++;
-            return (
-                <tr key={item._id}>
-                    <th scope="row">{count}</th>
-                    <td>{item.bookId}</td>
-                    <td>{item.bookName}</td>
-                    <td>{item.author}</td>
-                    <td>{item.publisher}</td>
-                    <td>{item.bookCount}</td>
-                </tr>
-            )
-        }) 
-       }) 
+        this.props.dispatch(getData());
     }
     render () {
+        let item;
+        let count = 0;
+        if(this.state.isFetching == true) {
+            item = <div>Loading..</div>
+        }
+        else if (this.state.bookList.length > 0) {
+            item = this.state.bookList.map(function(item){
+                        count++;
+                        return (
+                            <tr key={item.id}>
+                                <th scope="row">{count}</th>
+                                <td>{item.id}</td>
+                                <td>{item.title}</td>
+                                <td>{item.author}</td>
+                                <td>{item.publisher}</td>
+                                <td>{item.number}</td>
+                            </tr>
+                        )
+                    }) 
+        }
+        else {
+            item = <div> Data Not Available </div>
+        }
         return (
         <div>
             <NavBar />
@@ -63,7 +74,7 @@ export class Books extends React.Component {
         </tr>
         </thead>
         <tbody>
-            {this.state.bookList}
+            {item}
         </tbody>
         </table>
         </div>
@@ -71,3 +82,20 @@ export class Books extends React.Component {
         );
     }
 }
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        dispatch
+    }
+}
+
+function mapStateToProps(state) { 
+    return {
+        bookList: state.data.bookList,
+        isFetching: state.data.isFetching,
+        errorMEssage:state.data.errorMEssage
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Books)

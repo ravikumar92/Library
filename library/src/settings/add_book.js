@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { postData } from '../redux/action/send_data';
 
-export class AddBook extends React.Component {
+
+class AddBook extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,28 +26,7 @@ export class AddBook extends React.Component {
 
     submitData(event) {
         event.preventDefault();
-        fetch('http://10.11.7.59:8080/save-book',{
-            method:'POST',
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body:JSON.stringify(this.state)
-        })
-        .then((res) => res.json())
-        .then((resp) => { 
-            alert(resp.message);
-            this.setState(()=>{
-               return{
-                    bookName:'',
-                    bookId:'',
-                    author:'',
-                    publisher:'',
-                    bookType:'',
-                    bookCount:''
-               }
-            })
-        })
-
+        this.props.dispatch(postData(this.state))
     }
 
     render() {
@@ -75,7 +57,7 @@ export class AddBook extends React.Component {
                             <input type="text" className="form-control" value = {this.state.publisher} onChange={(event) => this.saveData('publisher', event)}/>
                         </div>
                     </div>
-                    <div className="form-group row">
+                    {/* <div className="form-group row">
                         <label>Book Type</label>
                         <select className="form-control" value={this.state.bookType} onChange={(event) => this.saveData('bookType', event)}>
                             <option></option>
@@ -85,7 +67,7 @@ export class AddBook extends React.Component {
                             <option>Economics</option>
                             <option>History</option>
                         </select>
-                    </div>
+                    </div> */}
                     <div className="form-group row">
                         <label htmlFor="bookCount" className="col-sm-4 col-form-label">Number of Books</label>
                         <div className="col-sm-10">
@@ -98,3 +80,15 @@ export class AddBook extends React.Component {
         )
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        dispatch
+    }
+}
+
+function mapStateToProps(state) { 
+    console.log('add book ' + state)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddBook)

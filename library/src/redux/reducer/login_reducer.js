@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST } from '../action/types'
+import { LOGIN_REQUEST } from '../action/types';
 
 const initialState = {
     userName: '',

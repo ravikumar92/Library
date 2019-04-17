@@ -1,2 +1,6 @@
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const REGISTRATION_REQUEST = 'REGISTRATION_REQUEST';
+export const GET_DATA = 'GET_DATA';
+export const POST_DATA = 'POST_DATA';
+export const GET_DATA_FAILURE = 'GET_DATA_FAILURE';
+export const GET_DATA_REQUEST = 'GET_DATA_REQUESRT';

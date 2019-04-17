@@ -1,9 +1,18 @@
+import {configure} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { mount, shallow } from 'enzyme';
+import { Provider } from 'react-redux';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+import AppWrapper from './App';
+import { Setting } from './settings';
+
+configure({ adapter: new Adapter() });
+
+
+describe('App component', () => {
+  it('Start with login component', () => {
+    const component = shallow( <AppWrapper/>)
+    expect(component.length).toEqual(1);
+  })
 });

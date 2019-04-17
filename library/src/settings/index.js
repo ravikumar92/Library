@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavBar } from '../navbar/navbar';
 import { SideBar } from './sidebar';
-import { AddBook } from './add_book';
+import  AddBook from './add_book';
 import { RemoveBook } from './remove_book';
 
 export class Setting extends React.Component {
@@ -40,7 +40,8 @@ export class Setting extends React.Component {
         return (
             <div>
                 <NavBar/>
-                <SideBar template={this.show}/>
+                <AddBook/>
+                {/* <SideBar template={this.show}/>
                 {
                     addBook &&
                     <AddBook/>
@@ -48,7 +49,7 @@ export class Setting extends React.Component {
                 {
                     removeBook &&
                     <RemoveBook/>
-                }
+                } */}
             </div>
         )
     }

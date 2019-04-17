@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const bookRef = require('./bookSchema');
+
 const registerSchema = new Schema({
     firstName:{
         type: String,
@@ -17,7 +19,7 @@ const registerSchema = new Schema({
     password:{
         type:String,
         required: true
-    }
+    },
 });
 
-var registerModel = module.exports = mongoose.model('register', registerSchema);
+module.exports = mongoose.model('user', registerSchema);

@@ -11,7 +11,6 @@ const initialState = {
 }
 
 export default function (state = initialState, action) {
-    console.log("IN REDUCER")
     switch(action.type) {
         case REGISTRATION_REQUEST: 
             return {

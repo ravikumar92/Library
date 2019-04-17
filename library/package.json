@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aws-amplify": "^1.1.22",
+    "aws-amplify-react": "^2.3.2",
+    "aws-appsync": "^1.7.1",
     "bootstrap": "^4.3.1",
+    "graphql-tag": "^2.10.1",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-redux": "^6.0.1",
@@ -26,5 +30,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2"
+  }
 }
